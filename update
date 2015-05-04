@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+cd ~
+
+# Download dotfiles if they do not exist
+if [ ! -d ~/.dotfiles ]; then
+    git clone git@github.com:bryantebeek/dotfiles.git ~/.dotfiles
+fi
+
+# Update dotfiles
+git -C ~/.dotfiles pull
+
+# Install Command Line Tools
+xcode-select --install
+
+# Install Homebrew & Co.
+if [ ! command -v brew >/dev/null 2>&1 ]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Install rcm for dotfiles management
+# See: <https://github.com/thoughtbot/rcm>
+brew tap thoughtbot/formulae
+brew install rcm
+
+# Symlink dotfiles
+rcup -v -x config

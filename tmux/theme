@@ -1,0 +1,47 @@
+# Colors
+tm_color_active=colour214
+tm_color_inactive=colour241
+tm_color_feature=colour4
+tm_color_music=colour203
+
+# Statusbar
+set -g status-left-length 32
+set -g status-right-length 150
+set -g status-attr default
+set -g status-interval 1
+set -g status-bg colour233
+set -g status-fg white
+set -g status-justify left
+
+# Windows
+setw -g window-status-fg $tm_color_inactive
+setw -g window-status-bg default
+setw -g window-status-attr dim
+set -g window-status-format "#I #W"
+
+# Windows (active)
+setw -g window-status-current-fg $tm_color_active
+setw -g window-status-current-bg default
+setw -g window-status-current-format "#[bold]#I #W"
+
+# Panes
+set -g pane-border-fg $tm_color_inactive
+set -g pane-active-border-fg $tm_color_active
+set -g display-panes-active-colour $tm_color_active
+set -g display-panes-colour $tm_color_inactive
+
+# Messages
+set -g message-bg default
+set -g message-fg $tm_color_active
+
+# Clock
+setw -g clock-mode-colour $tm_color_active
+
+# Layout
+tm_spotify="#[fg=$tm_color_music]#(osascript ~/.dotfiles/applescripts/spotify.scpt)"
+tm_date="#[fg=$tm_color_inactive] %R %d %b"
+tm_host="#[fg=$tm_color_feature,bold]#h"
+tm_session_name="#[fg=$tm_color_feature,bold] ♦ #S"
+
+set -g status-left $tm_session_name
+set -g status-right $tm_spotify' '$tm_date' '$tm_host

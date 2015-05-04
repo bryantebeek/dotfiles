@@ -1,0 +1,43 @@
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Flush Directory Service cache
+alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Enable/Disable Spotlight
+alias spotoff="sudo mdutil -a -i off"
+alias spoton="sudo mdutil -a -i on"
+
+# Kill all the tabs in Chrome to free up memory
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Disable exit
+alias exit="echo 'nope'"
+
+# Easily create/attach Tmux sessions
+alias t=tmuxSession
+
+tmuxSession() {
+	if tmux has-session -t "$1" 2> /dev/null; then
+		tmux attach -t "$1"
+	else
+		tmux new -s "$1"
+	fi
+}
+
