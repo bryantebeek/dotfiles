@@ -39,9 +39,8 @@ setw -g clock-mode-colour $tm_color_active
 
 # Layout
 tm_spotify="#[fg=$tm_color_music]#(osascript ~/.dotfiles/applescripts/spotify.scpt)"
-tm_date="#[fg=$tm_color_inactive] %R %d %b"
-tm_host="#[fg=$tm_color_feature,bold]#h"
+tm_datetime="#[fg=$tm_color_inactive] #(date -u | awk '{print $4}') - %d %b %Y"
 tm_session_name="#[fg=$tm_color_feature,bold] ♦ #S"
 
 set -g status-left $tm_session_name
-set -g status-right $tm_spotify' '$tm_date' '$tm_host
+set -g status-right $tm_spotify' '$tm_datetime

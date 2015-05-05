@@ -1,5 +1,5 @@
 # Bindings
-bind r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf \; display-message "Reloading configuration ..."
 bind x kill-pane
 
 # Synchronisation

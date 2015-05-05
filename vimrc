@@ -8,9 +8,12 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'mattn/emmet-vim'
+Plugin 'othree/html5.vim'
 
 call vundle#end()
 
@@ -48,16 +51,13 @@ set nobackup noswapfile nowb
 " Always open new windows on the right/bottom
 set splitright splitbelow
 
-set wildignore+=*/tmp/*,*/.sass-cache/*,*/node_modules/*,*/.git/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*/.sass-cache/*,*/node_modules/*,*/.git/*,*.so,*.swp,*.zip,*/_site/*
 
 " }}}
 " 2. Plugins -------------------------------------------------------------- {{{
 
 " ctrlp
-" let g:ctrlp_working_path_mode = 'ra'
-
-" delimitMate
-let delimitMate_expand_cr=1
+let g:ctrlp_split_window = 0
 
 " syntastic
 let g:syntastic_auto_loc_list=1
@@ -65,11 +65,6 @@ let g:syntastic_loc_list_height=2
 let g:syntastic_enable_signs=0
 let g:syntastic_enable_highlighting=0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['javascript', 'json', 'ruby'], 'passive_filetypes': [] }
-
-let g:gofmt_command="goimports"
-
-"json
-let g:vim_json_syntax_conceal=0
 
 " }}}
 " 3. Interface ------------------------------------------------------------ {{{
