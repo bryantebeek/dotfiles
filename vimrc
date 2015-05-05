@@ -14,6 +14,9 @@ Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
 
@@ -66,6 +69,10 @@ let g:syntastic_enable_signs=0
 let g:syntastic_enable_highlighting=0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['javascript', 'json', 'ruby'], 'passive_filetypes': [] }
 
+" indent line
+let g:indentLine_color_term = 234
+let g:indentLine_char = '│'
+
 " }}}
 " 3. Interface ------------------------------------------------------------ {{{
 
@@ -73,7 +80,10 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['javascript
 set t_Co=256
 
 " Colorscheme
-colo hardcore
+colo bryantebeek
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " No line numbers
 set nonumber
