@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'kchmck/vim-coffee-script'
@@ -152,8 +153,8 @@ endfunction
 " 4. Indentation ---------------------------------------------------------- {{{
 
 " Set tab display as four spaces, don't expand
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
 set smarttab
 
