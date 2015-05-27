@@ -39,6 +39,7 @@ hi FoldColumn                ctermbg=234
 hi NonText                   ctermfg=233
 hi StatusLine                ctermbg=4 ctermfg=233
 hi StatusLineNC              ctermbg=237 ctermfg=233
+hi VertSplit                 ctermbg=235 ctermfg=235
 
 " Javascript
 hi javaScriptBraces          ctermfg=255

@@ -31,6 +31,8 @@ let mapleader=','
 " This causes you to not be able to delete stuff otherwise, sometimes
 set backspace=2
 
+set fillchars+=vert:\
+
 " Share clipboard with OSX
 set clipboard=unnamed
 
