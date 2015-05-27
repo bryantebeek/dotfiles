@@ -17,6 +17,7 @@ Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 
@@ -126,13 +127,8 @@ set nofoldenable
 set list
 set listchars=tab:\|\ ,trail:·,extends:❯,precedes:❮
 
-" Change StatusLine colors
-hi StatusLine ctermfg=233
-hi StatusLine ctermbg=red
-
 " Line numbers
 set number
-hi LineNr ctermbg=NONE
 
 " No sound effects
 set noerrorbells
