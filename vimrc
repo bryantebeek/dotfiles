@@ -12,6 +12,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/syntastic.git'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
@@ -75,6 +76,9 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['javascript
 let g:indentLine_color_term = 234
 let g:indentLine_char = '│'
 
+" NERDTree
+let g:NERDTreeWinSize=50
+
 " }}}
 " 3. Interface ------------------------------------------------------------ {{{
 
@@ -123,10 +127,6 @@ set foldmethod=indent
 set foldlevelstart=99
 set foldnestmax=3
 set nofoldenable
-
-" Show tab characters & when a line is too long
-set list
-set listchars=tab:\|\ ,trail:·,extends:❯,precedes:❮
 
 " Line numbers
 set number
