@@ -34,7 +34,7 @@ filetype plugin indent on
 let mapleader=','
 
 " This causes you to not be able to delete stuff otherwise, sometimes
-set backspace=2
+set backspace=indent,eol,start
 
 " Share clipboard with OSX
 set clipboard=unnamed
@@ -42,10 +42,10 @@ set clipboard=unnamed
 " Spell check language
 set spelllang=en_gb
 
-" BOM can cause some errors sometimes
-set encoding=utf-8 nobomb
+" Use UTF-8 encoding
+set encoding=utf-8
 
-" Don't update display while executing macros
+" Don't update screen while executing macros
 set lazyredraw
 
 " Reload files when changed externally
@@ -60,6 +60,7 @@ set nobackup noswapfile nowb
 " Always open new windows on the right/bottom
 set splitright splitbelow
 
+" Ignore
 set wildignore+=*/tmp/*,*/.sass-cache/*,*/node_modules/*,*/.git/*,*.so,*.swp,*.zip,*/_site/*
 
 " }}}
