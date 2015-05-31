@@ -16,10 +16,13 @@ Plugin 'scrooloose/syntastic.git'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()
 
@@ -169,7 +172,8 @@ set nowrap
 " 5. Keybinds ------------------------------------------------------------- {{{
 
 " NerdTree
-map <leader>k :NERDTreeToggle<CR>
+map <leader>m :NERDTreeToggle<CR>
+map <leader>n :NERDTreeFind<CR>
 
 " Disable dem arrow keys
 map <up> <nop>
