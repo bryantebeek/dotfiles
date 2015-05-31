@@ -95,9 +95,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" No line numbers
-set nonumber
-
 " Highlight current line only for active window
 autocmd BufWinEnter * setlocal cursorline
 autocmd WinEnter * setlocal cursorline
@@ -132,7 +129,7 @@ set foldlevelstart=99
 set foldnestmax=3
 set nofoldenable
 
-" Line numbers
+" Enable line numbers
 set number
 
 " No sound effects
@@ -141,17 +138,6 @@ set visualbell
 
 " Toggle paste mode in insert mode
 set pastetoggle=<leader>p
-
-" Format the statusline
-set statusline=%{HasPaste()}%f\ %m%r%h\ \ \ \ \ Col:\ %c\ \ \ Row:\ %l/%L\ -\ %p%%
-
-function! HasPaste()
-	if &paste
-		return 'PASTE '
-	else
-		return ''
-	endif
-endfunction
 
 " }}}
 " 4. Indentation ---------------------------------------------------------- {{{
@@ -192,30 +178,9 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-l> <C-W>l
 
-" Easier tab switching
-nmap <esc>1 1gt
-nmap <esc>2 2gt
-nmap <esc>3 3gt
-nmap <esc>4 4gt
-nmap <esc>5 5gt
-nmap <esc>6 6gt
-nmap <esc>7 7gt
-nmap <esc>8 8gt
-nmap <esc>9 9gt
-
 " Faster scrolling
 nnoremap <C-e> 10<C-e>
 nnoremap <C-y> 10<C-y>
-
-" Duplicate line
-noremap <leader>dd Yp
-noremap <leader>du YP
-
-" Easier buffer resizing
-nmap < 5<C-w><
-nmap - 5<C-w>-
-nmap + 5<C-w>+
-nmap > 5<C-w>>
 
 " Auto-center search results
 nmap n nzz
@@ -226,7 +191,7 @@ nnoremap <space> za
 vnoremap <space> zf
 
 " Quickly edit/reload the vimrc file
-nnoremap <leader>ev <c-w><c-v><c-l>:e $MYVIMRC<cr>
+noremap <leader>ev <c-w><c-v><c-l>:e $MYVIMRC<cr>
 
 " Make tab indent in visual mode, and shift tab undent
 vmap <tab> >gv
@@ -245,22 +210,19 @@ inoremap <s-tab> <c-n>
 " }}}
 " 6. File types ----------------------------------------------------------- {{{
 
-au BufRead,BufNewFile *.slab,*.mu,*.mustache set filetype=html
+" Easier buffer resizing
+nmap < 5<C-w><
+nmap - 5<C-w>-
+nmap + <C-w>+
+nmap > <C-w>>
 
-" Read .ru and capfiles as ruby
-au BufRead,BufNewFile *.god,*.ru set filetype=ruby
-au BufRead,BufNewFile capfile set filetype=ruby
+" Set Capfile, Gemfile and Vagrantfile as Ruby
+au BufRead,BufNewFile Capfile set filetype=ruby
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 
-" hard-wrap markdown files
+" Wrap Markdown files
 au BufRead,BufNewFile *.md setl wrap tw=80 sw=2 sts=2 et
-
-" Two space indents for ruby
-au FileType ruby setl sw=2 sts=2 et
-
-" Four space indents for python
-au FileType python setl sw=4 sts=4 et
 
 " }}}
 " 7. Functions ------------------------------------------------------------ {{{
@@ -275,7 +237,7 @@ function! StripWhitespace ()
 	call setreg('/', old_query)
 endfunction
 
-" When editing a file, always jump to the last known cursor position.
+" When editing a file, always jump to the last known cursor position
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal g`\"" |
