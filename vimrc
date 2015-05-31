@@ -158,6 +158,19 @@ set nowrap
 " }}}
 " 5. Keybinds ------------------------------------------------------------- {{{
 
+" Easier save
+map <leader>w :write<CR>
+
+" Fugitive (Git)
+map <leader>gs :Gstatus<CR>
+map <leader>gc :Gcommit<CR>
+map <leader>gr :Gread<CR>
+map <leader>gb :Gblame<CR>
+map <leader>gl :Glog<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>go :Gvsplit<CR>
+map <leader>gg :Ggrep
+
 " NerdTree
 map <leader>m :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
