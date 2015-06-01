@@ -169,7 +169,11 @@ map <leader>gb :Gblame<CR>
 map <leader>gl :Glog<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>go :Gvsplit<CR>
-map <leader>gg :Ggrep
+map <leader>gg :Ggrep 
+
+" Improved searching when using vimgrep
+map <leader>ss :vimgrep  **/*<left><left><left><left><left>
+map <leader>sl :botright cope<CR>
 
 " NerdTree
 map <leader>m :NERDTreeToggle<CR>
@@ -241,14 +245,13 @@ au BufRead,BufNewFile *.md setl wrap tw=80 sw=2 sts=2 et
 " 7. Functions ------------------------------------------------------------ {{{
 
 " Trim whitespace off line-endings on save
-autocmd BufWritePre * :call StripWhitespace()
 function! StripWhitespace ()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+    exe "normal mz"
+	%s/\s\+$//ge
+	exe "normal `z"
 endfunction
+
+autocmd BufWritePre *.js :call StripWhitespace()
 
 " When editing a file, always jump to the last known cursor position
 autocmd BufReadPost *
