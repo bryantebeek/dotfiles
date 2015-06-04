@@ -51,6 +51,9 @@ set lazyredraw
 " Reload files when changed externally
 set autoread
 
+" Automatically write a file when it's buffer is hidden
+set autowrite
+
 " Don't use modelines
 set modelines=0
 
@@ -75,6 +78,7 @@ let g:syntastic_loc_list_height=2
 let g:syntastic_enable_signs=0
 let g:syntastic_enable_highlighting=0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['javascript', 'json', 'ruby'], 'passive_filetypes': [] }
+let g:syntastic_javascript_checkers=['jscs']
 
 " indent line
 let g:indentLine_color_term = 234
@@ -102,6 +106,9 @@ autocmd WinLeave * setlocal nocursorline
 
 " Always show status line
 set laststatus=2
+
+" Allow buffers to move to background
+set hidden
 
 " Update the title bar
 set title
@@ -158,8 +165,12 @@ set nowrap
 " }}}
 " 5. Keybinds ------------------------------------------------------------- {{{
 
-" Easier save
+" Easier save and quit
 map <leader>w :write<CR>
+map <leader>q :quit<CR>
+
+" Buffers
+map <leader>bl :buffers<CR>
 
 " Fugitive (Git)
 map <leader>gs :Gstatus<CR>
@@ -169,11 +180,13 @@ map <leader>gb :Gblame<CR>
 map <leader>gl :Glog<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>go :Gvsplit<CR>
+map <leader>gp :Gpush<CR>
 map <leader>gg :Ggrep 
 
 " Improved searching when using vimgrep
 map <leader>ss :vimgrep  **/*<left><left><left><left><left>
 map <leader>sl :botright cope<CR>
+map <leader>sh :noh<CR>
 
 " NerdTree
 map <leader>m :NERDTreeToggle<CR>
