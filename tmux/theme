@@ -17,12 +17,12 @@ set -g status-justify left
 setw -g window-status-fg $tm_color_inactive
 setw -g window-status-bg default
 setw -g window-status-attr dim
-set -g window-status-format "#I #W"
+set -g window-status-format " #W"
 
 # Windows (active)
 setw -g window-status-current-fg $tm_color_active
 setw -g window-status-current-bg default
-setw -g window-status-current-format "#[bold]#I #W"
+setw -g window-status-current-format " #[bold]#W"
 
 # Panes
 set -g pane-border-fg $tm_color_inactive
@@ -40,7 +40,7 @@ setw -g clock-mode-colour $tm_color_active
 # Layout
 tm_spotify="#[fg=$tm_color_music]#(osascript ~/.dotfiles/applescripts/spotify.scpt)"
 tm_datetime="#[fg=$tm_color_inactive] #(date | awk '{print $4}') - %d %b %Y"
-tm_session_name="#[fg=$tm_color_feature,bold] ♦ #S"
+tm_session_name="#[fg=$tm_color_feature,bold] ♦ #S "
 
 set -g status-left $tm_session_name
 set -g status-right $tm_spotify' '$tm_datetime

@@ -22,7 +22,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'wakatime/vim-wakatime'
+Plugin 'heavenshell/vim-jsdoc'
 
 call vundle#end()
 
@@ -45,9 +45,6 @@ set spelllang=en_gb
 " Use UTF-8 encoding
 set encoding=utf-8
 
-" Don't update screen while executing macros
-set lazyredraw
-
 " Reload files when changed externally
 set autoread
 
@@ -65,6 +62,15 @@ set splitright splitbelow
 
 " Ignore
 set wildignore+=*/tmp/*,*/.sass-cache/*,*/node_modules/*,*/.git/*,*.so,*.swp,*.zip,*/_site/*
+
+" Replace grep with The Silver Searcher
+set grepprg=ag\ --nogroup\ --nocolor
+
+" Use Ag in CtrlP for listing files
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" Ag command to search using ag and open in a quickfix window
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 " }}}
 " 2. Plugins -------------------------------------------------------------- {{{
@@ -86,6 +92,12 @@ let g:indentLine_char = '│'
 
 " NERDTree
 let g:NERDTreeWinSize=50
+
+" JsDoc
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_return_description=0
+let g:jsdoc_input_description=1
+let g:jsdoc_default_mapping=0
 
 " }}}
 " 3. Interface ------------------------------------------------------------ {{{
@@ -174,19 +186,19 @@ map <leader>bl :buffers<CR>
 
 " Fugitive (Git)
 map <leader>gs :Gstatus<CR>
-map <leader>gc :Gcommit<CR>
 map <leader>gr :Gread<CR>
 map <leader>gb :Gblame<CR>
 map <leader>gl :Glog<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>go :Gvsplit<CR>
-map <leader>gp :Gpush<CR>
-map <leader>gg :Ggrep 
+map <leader>gp :new \| .! git push<CR>
+map <leader>gg :new \| .! git fetch && git rebase && git push<CR>
 
 " Improved searching when using vimgrep
-map <leader>ss :vimgrep  **/*<left><left><left><left><left>
+map <leader>ss :Ag<SPACE>
 map <leader>sl :botright cope<CR>
 map <leader>sh :noh<CR>
+map <leader>sw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " NerdTree
 map <leader>m :NERDTreeToggle<CR>
@@ -227,9 +239,6 @@ noremap <leader>ev <c-w><c-v><c-l>:e $MYVIMRC<cr>
 vmap <tab> >gv
 vmap <s-tab> <gv
 
-" Easier commands
-nnoremap ; :
-
 " Escape mode
 inoremap jj <ESC>
 
@@ -241,10 +250,8 @@ inoremap <s-tab> <c-n>
 " 6. File types ----------------------------------------------------------- {{{
 
 " Easier buffer resizing
-nmap < 5<C-w><
-nmap - 5<C-w>-
-nmap + <C-w>+
-nmap > <C-w>>
+nmap < 5<C-w>>
+nmap > 5<C-w><
 
 " Set Capfile, Gemfile and Vagrantfile as Ruby
 au BufRead,BufNewFile Capfile set filetype=ruby

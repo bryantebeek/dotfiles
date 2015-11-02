@@ -15,3 +15,12 @@ source $ZSH/oh-my-zsh.sh
 
 # Use z for easy navigation
 . `brew --prefix`/etc/profile.d/z.sh
+
+# Start a Tmux session if none is currently active (useful on startup)
+if [ -z "$TMUX" ]; then
+    tmux attach -t Default || tmux new -s Default
+fi
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export TERM=xterm-256color
