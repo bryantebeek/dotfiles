@@ -47,6 +47,7 @@
 
 (projectile-global-mode)
 (setq projectile-completion-system 'grizzl)
+(setq projectile-enable-caching t)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (menu-bar-mode -1)
@@ -62,8 +63,12 @@
 
 (global-set-key (kbd "C-k") 'windmove-up)
 (global-set-key (kbd "C-j") 'windmove-down)
-(global-set-key (kbd "C-h") 'windmove-left)
+;(global-set-key (kbd "C-h") 'windmove-left)
 (global-set-key (kbd "C-l") 'windmove-right)
+
+(global-unset-key (kbd "C-p"))
+(local-unset-key (kbd "C-p"))
+(global-set-key (kbd "C-p") 'projectile-find-file)
 
 (add-hook 'term-mode-hook
 	  (lambda ()
@@ -110,3 +115,4 @@
 (set-face-foreground 'mode-line "#666666")
 (set-face-background 'mode-line-inactive "#121212")
 (set-face-foreground 'mode-line-inactive "#222222")
+
