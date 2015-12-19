@@ -2,10 +2,11 @@ if application "Spotify" is running then
   tell application "Spotify"
     set theName to name of the current track
     set theArtist to artist of the current track
-    set theAlbum to album of the current track
-    set theUrl to spotify url of the current track
+    set theState to player state
     try
-      return "♫  " & theName & " - " & theArtist
+      if theState equals playing then
+        return "♫  " & theName & " - " & theArtist & " "
+      end if
     on error err
     end try
   end tell

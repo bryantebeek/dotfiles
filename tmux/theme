@@ -38,7 +38,7 @@ set -g message-fg $tm_color_active
 setw -g clock-mode-colour $tm_color_active
 
 # Layout
-tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/spotify.scpt) #(bash #{pane_current_path}/.tmux-status) #[fg=$tm_color_inactive] %I:%M / %d %b %Y"
+tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/radium.scpt)#(osascript ~/.dotfiles/applescripts/spotify.scpt)#(bash #{pane_current_path}/.tmux-status) #[fg=$tm_color_inactive] %H:%M / %d %b %Y"
 tm_left="#[fg=$tm_color_feature,bold] ♦ #S "
 
 set -g status-left $tm_left
