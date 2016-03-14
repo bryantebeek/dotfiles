@@ -260,3 +260,7 @@ function explain() {
     echo "explain 'cmd -o | ...'   one quoted command to explain it."
   fi
 }
+
+function g() {
+  echo $(perl -MURI::Escape -e 'print uri_escape($1);')
+}
