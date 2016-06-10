@@ -24,3 +24,6 @@ fi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=xterm-256color
+export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
+export PATH="/Users/bryantebeek/.composer/vendor/bin:$PATH"
+export PATH="/Users/bryantebeek/Library/Android/sdk/platform-tools:$PATH"

@@ -17,13 +17,13 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'heavenshell/vim-jsdoc'
-Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
@@ -37,8 +37,9 @@ let mapleader=','
 " This causes you to not be able to delete stuff otherwise, sometimes
 set backspace=indent,eol,start
 
-" Share clipboard with OSX
-set clipboard=unnamed
+" Automatically yank to system clipboard on OSX
+nnoremap y "+y
+vnoremap y "+y
 
 " Spell check language
 set spelllang=en_gb
@@ -151,6 +152,7 @@ set nofoldenable
 
 " Enable line numbers
 set number
+set relativenumber
 
 " No sound effects
 set noerrorbells
@@ -178,12 +180,9 @@ set nowrap
 " }}}
 " 5. Keybinds ------------------------------------------------------------- {{{
 
-" Easier save and quit
+" Save and Quit
 map <leader>w :write<CR>
 map <leader>q :quit<CR>
-
-" Buffers
-map <leader>bl :buffers<CR>
 
 " Fugitive (Git)
 map <leader>gs :Gstatus<CR>
@@ -195,7 +194,7 @@ map <leader>go :Gvsplit<CR>
 map <leader>gp :new \| .! git push<CR>
 map <leader>gg :new \| .! git fetch && git rebase && git push<CR>
 
-" Improved searching when using vimgrep
+" Searching
 map <leader>ss :Ag<SPACE>
 map <leader>sl :botright cope<CR>
 map <leader>sh :noh<CR>
@@ -215,11 +214,15 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Easier buffer switching
-nmap <C-h> <C-W>h
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-l> <C-W>l
+" Split movement
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+" Better splitting
+noremap <leader>sd :split<CR>
+noremap <leader>sf :vsplit<CR>
 
 " Faster scrolling
 nnoremap <C-e> 10<C-e>
@@ -246,6 +249,18 @@ inoremap jj <ESC>
 " Tab completion
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
+
+" Autocomplete pairs
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {{ {
+inoremap {} {}
+
+inoremap ( ()<Left>
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
 " }}}
 " 6. File types ----------------------------------------------------------- {{{
