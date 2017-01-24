@@ -35,6 +35,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias exit="echo 'nope'"
 
 # Easily create/attach Tmux sessions
+alias trc=tmuxRc
 alias t=tmuxSession
 
 tmuxSession() {
@@ -45,5 +46,6 @@ tmuxSession() {
 	fi
 }
 
-# Use neovim instead of vim
-alias vi=nvim
+tmuxRc() {
+    tmux source-file "`pwd`/.tmuxrc" 
+}

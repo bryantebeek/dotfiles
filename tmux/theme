@@ -17,12 +17,12 @@ set -g status-justify left
 setw -g window-status-fg $tm_color_inactive
 setw -g window-status-bg default
 setw -g window-status-attr dim
-set -g window-status-format "#W"
+set -g window-status-format "  #W"
 
 # Windows (active)
 setw -g window-status-current-fg $tm_color_active
 setw -g window-status-current-bg default
-setw -g window-status-current-format "#[bold]#W"
+setw -g window-status-current-format "  #[bold]#W"
 
 # Panes
 set -g pane-border-fg $tm_color_inactive
@@ -38,7 +38,7 @@ set -g message-fg $tm_color_active
 setw -g clock-mode-colour $tm_color_active
 
 # Layout
-tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/radium.scpt)#(osascript ~/.dotfiles/applescripts/spotify.scpt)#(bash #{pane_current_path}/.tmux-status) #[fg=$tm_color_inactive] %H:%M / %d %b %Y"
+tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/radium.scpt)#(osascript ~/.dotfiles/applescripts/radiant.scpt)#(osascript ~/.dotfiles/applescripts/spotify.scpt)#(bash #{pane_current_path}/.tmux-status) #[fg=$tm_color_inactive] %H:%M / %d %b %Y"
 tm_left="#[fg=$tm_color_feature,bold] ♦ #S "
 
 set -g status-left $tm_left
