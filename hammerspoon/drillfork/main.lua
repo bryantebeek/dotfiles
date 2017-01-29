@@ -8,27 +8,49 @@ alphabet = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q",
 
 -- Variables
 hotkeys = {}
+initialWindow = nil
+modal = nil
+
+-- Helpers
+function clearHotkeys()
+    for i = 1, #alphabet do
+        hs.hotkey.deleteAll({}, alphabet[i])
+    end
+end
 
 drillfork.setConfigurationFile = function(file)
     drillfork.config = require(file)(drillfork)
 
     for _, plugin in pairs(drillfork.config.plugins) do
-        drillfork.plugins[plugin] = require('drillfork/plugins/' .. plugin)
+        local id = string.gsub(plugin, 'drillfork/plugins/', '')
+        drillfork.plugins[id] = require(plugin)
     end
 end
 
-drillfork.start = function()
-    k = hs.hotkey.modal.new(drillfork.config.leaderKeyModifiers, drillfork.config.leaderKey)
+drillfork.initialWindow = function()
+    return initialWindow
+end
 
-    function clear()
-        for i = 1, #alphabet do
-            hs.hotkey.deleteAll({}, alphabet[i])
-        end
+drillfork.back = function()
+    if initialWindow ~= nil then
+        initialWindow:focus()
     end
+end
+
+drillfork.finished = function()
+    clearHotkeys()
+    modal:exit()
+    drillfork.ui.hide()
+end
+
+drillfork.start = function()
+    modal = hs.hotkey.modal.new(drillfork.config.leaderKeyModifiers, drillfork.config.leaderKey)
 
     function show(hotkey)
         drillfork.ui.clearLines()
-        drillfork.ui.addBreadcrumb(hotkey["name"])
+        drillfork.ui.setBreadcrumb(hotkey["name"])
+
+        clearHotkeys()
 
         local children = hotkey["children"]
         local status, result = pcall(children)
@@ -44,25 +66,22 @@ drillfork.start = function()
                 if child["children"] then return show(child) end
 
                 -- If the hotkey has a runner, we run it
-                local status, result = pcall(child["run"], child)
-                if status then return k:exit() end
+                local callback = function() initialWindow = nil end
+                local status, result = pcall(child["run"], callback)
+                if status then drillfork.finished() end
             end) 
         end
 
         drillfork.ui.render()
     end
 
-    function k:entered()
+    function modal:entered()
+        initialWindow = hs.window.focusedWindow()
         show({ key = drillfork.config.leaderKey, name = "Home", children = drillfork.config.hotkeys() })
         drillfork.ui.show()
     end
 
-    function k:exited()
-        clear()
-        drillfork.ui.hide()
-    end
-
-    k:bind({}, 'escape', function() k:exit() end)
+    modal:bind({}, 'escape', function() drillfork.finished() end)
 end
 
 return drillfork

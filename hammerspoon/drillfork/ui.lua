@@ -17,16 +17,14 @@ body:setTextFont("Menlo")
 body:setTextSize(14)
 
 local breadcrumbr = hs.geometry.rect(bgr.x + 10,bgr.y + 10,bgr.w - 20,bgr.h - 20)
-breadcrumbText = ""
-breadcrumb = hs.drawing.text(breadcrumbr, breadcrumbText)
+breadcrumb = hs.drawing.text(breadcrumbr, "Home")
 breadcrumb:setTextFont("Menlo")
-breadcrumb:setTextSize(11)
+breadcrumb:setTextSize(12)
 
 lines = {}
 
-ui.addBreadcrumb = function(name)
-    breadcrumbText = breadcrumbText .. name .. " / "
-    breadcrumb:setText(breadcrumbText)
+ui.setBreadcrumb = function(name)
+    breadcrumb:setText(name)
 end
 
 ui.hide = function()
@@ -36,8 +34,6 @@ ui.hide = function()
     lines = {}
     bodyText = ""
     body:hide()
-
-    breadcrumbText = ""
     breadcrumb:hide()
 end
 
@@ -59,8 +55,6 @@ ui.addLine = function(line)
 end
 
 ui.render = function()
-    breadcrumb:setText(breadcrumbText)
-
     bodyText = ""
 
     for i = 1, #lines do
