@@ -167,8 +167,8 @@
 	insteadOf = "gist:"
 
 [user]
-  email = bryantebeek@gmail.com
-  name = Bryan te Beek
+	email = bryantebeek@gmail.com
+	name = Bryan te Beek
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -183,3 +183,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[commit]
+	template = /Users/bryantebeek/.stCommitMsg

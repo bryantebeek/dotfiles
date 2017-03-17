@@ -6,7 +6,7 @@ tm_color_music=colour203
 
 # Statusbar
 set -g status-left-length 32
-set -g status-right-length 150
+set -g status-right-length 250
 set -g status-attr default
 set -g status-interval 10
 set -g status-bg colour233
@@ -38,7 +38,7 @@ set -g message-fg $tm_color_active
 setw -g clock-mode-colour $tm_color_active
 
 # Layout
-tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/radium.scpt)#(osascript ~/.dotfiles/applescripts/radiant.scpt)#(osascript ~/.dotfiles/applescripts/spotify.scpt)#(bash #{pane_current_path}/.tmux-status) #[fg=$tm_color_inactive] %H:%M / %d %b %Y"
+tm_right="#[fg=colour14]#(osascript ~/.dotfiles/applescripts/radium.scpt)#(osascript ~/.dotfiles/applescripts/radiant.scpt)#(osascript ~/.dotfiles/applescripts/spotify.scpt)#(node #(cd #{pane_current_path} && git rev-parse --show-toplevel)/.tmux-status/init.js) #[fg=$tm_color_inactive] %H:%M / %d %b %Y"
 tm_left="#[fg=$tm_color_feature,bold] ♦ #S "
 
 set -g status-left $tm_left
