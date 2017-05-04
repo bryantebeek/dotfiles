@@ -34,6 +34,12 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Disable exit
 alias exit="echo 'nope'"
 
+# Speedtest
+alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip"
+
+# Hosts
+alias hosts="sudo vi /etc/hosts"
+
 # Easily create/attach Tmux sessions
 alias trc=tmuxRc
 alias t=tmuxSession
