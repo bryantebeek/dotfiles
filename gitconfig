@@ -58,7 +58,13 @@
 
 	# Remove branches that have already been merged with master
 	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    # Commit a changelog
+    changelog = "!git add CHANGELOG.md && git commit -m 'docs(changelog): update changelog' && git push"
+
+    # Commit a readme
+    readme = "!git add README.md && git commit -m 'docs(readme): update readme' && git push"
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered

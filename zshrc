@@ -5,6 +5,8 @@ for file in ~/.{path,exports,aliases}; do
 done
 unset file
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # Oh-My-Zsh
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="bryantebeek"
@@ -18,14 +20,3 @@ source $ZSH/oh-my-zsh.sh
 
 # ZSH Syntax Highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export TERM=xterm-256color
-
-# Enable PHP 7
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-export PATH="/Users/bryantebeek/.composer/vendor/bin:$PATH"
-
-# Enable sonar-scanner
-export PATH="/Users/bryantebeek/.sonar-scanner/bin:$PATH"

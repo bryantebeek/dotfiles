@@ -9,7 +9,6 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-
 # Flush Directory Service cache
 alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
@@ -31,27 +30,39 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
-# Disable exit
-alias exit="echo 'nope'"
-
 # Speedtest
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip"
 
 # Hosts
 alias hosts="sudo vi /etc/hosts"
 
-# Easily create/attach Tmux sessions
-alias trc=tmuxRc
-alias t=tmuxSession
+# Random.org
+alias password="curl -s 'https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new' | pbcopy"
 
-tmuxSession() {
-	if tmux has-session -t "$1" 2> /dev/null; then
-		tmux attach -t "$1"
+# Chrome
+app() {
+    echo "$1"
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app=$1
+}
+
+# Quick watching
+alias w="watch -n 0.5 "
+
+wu() {
+	if [ -z "$2" ]; then
+		watch --color --no-title "tput setaf 2; echo 'HTTP status:'; tput setaf 7; curl -sLI $1; tput setaf 2; echo 'TOP status:'; tput setaf 7; ssh root@$1 'top -b -n 1 | head'"
 	else
-		tmux new -s "$1"
+    	watch --color --no-title "tput setaf 2; echo 'HTTP status:'; tput setaf 7; curl -sLI $1; tput setaf 2; echo 'TOP status:'; tput setaf 7; ssh root@$1 'top -b -n 1 | head'; tput setaf 2; echo '\nExtra (${@:2}):'; tput setaf 7; ssh root@$1 '${@:2}'"
 	fi
 }
 
-tmuxRc() {
-    tmux source-file "`pwd`/.tmuxrc" 
+alias ls=exa
+
+alias flip='echo "(╯°□°）╯︵ ┻━┻" | tr -d "\n" | pbcopy && echo "copied (╯°□°）╯︵ ┻━┻"'
+alias unflip='echo "┬─┬ノ(°- °ノ)" | tr -d "\n" | pbcopy && echo "copied ┬─┬ノ(°- °ノ)"''"))"'
+alias ouchflip='echo "ﾐ┻┻(ﾉ>｡<)ﾉ" | tr -d "\n" | pbcopy && echo "copied ﾐ┻┻(ﾉ>｡<)ﾉ"''"))"'
+
+# Quickly run an iterm2 project file
+project() {
+    osascript .iterm2
 }
