@@ -103,6 +103,7 @@ PROJECT_DIRECTORIES=(
 DIR_ACTIONS="Change working directory (cd):cd <DIR>
 Source Tree:open <DIR> -a 'SourceTree'
 Visual Studio Code:open <DIR> -a 'Visual Studio Code'
+Git open remote:
 $EDITOR:$EDITOR <DIR>"
 
 FILE_ACTIONS="Open:open <FILE>
@@ -121,27 +122,29 @@ function searchDirectories() {
     echo $(mdfind 'kMDItemContentType == public.folder' -onlyin "$SEARCH_DIRECTORY" | fzf --exit-0 --header=Directories --preview 'cat {}')
 }
 
+function search
+
 function _fileActions() {
     if [ -z "$1" ]; then return; fi
 
-    LOCAL_FILE_ACTIONS=${${2}:-$FILE_ACTIONS}
+    LOCAL_FILE_ACTIONS=${2:-$FILE_ACTIONS}
     KEY=$(echo "$LOCAL_FILE_ACTIONS" | cut -d":" -f1 | fzf --exit-0 --header="Actions on $1" --preview "cat '"$1"'")
 
     if [ -z "$KEY" ]; then return; fi
 
-    ACTION=$(echo "$LOCAL_FILE_ACTIONS" | grep $KEY | cut -d":" -f2)
+    ACTION=$(echo "$LOCAL_FILE_ACTIONS" | grep "$KEY" | cut -d":" -f2)
     eval $(echo $ACTION | sed "s/<FILE>/$1/g")
 }
 
 function _directoryActions() {
     if [ -z "$1" ]; then return; fi
 
-    LOCAL_DIR_ACTIONS=${${2}:-$DIR_ACTIONS}
+    LOCAL_DIR_ACTIONS=${2:-$DIR_ACTIONS}
     KEY=$(echo "$LOCAL_DIR_ACTIONS" | cut -d":" -f1 | fzf --exit-0 --header="Actions on $1")
     
     if [ -z "$KEY" ]; then return; fi
 
-    ACTION=$(echo "$LOCAL_DIR_ACTIONS" | grep $KEY | cut -d":" -f2)
+    ACTION=$(echo "$LOCAL_DIR_ACTIONS" | grep "$KEY" | cut -d":" -f2)
     eval $(echo $ACTION | sed 's/<DIR>/$1/g')
 }
 
