@@ -1,11 +1,8 @@
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`
-for file in ~/.{path,exports,aliases}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
+# iTerm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Z
+test -e "/usr/local/etc/profile.d/z.sh" && source "/usr/local/etc/profile.d/z.sh"
 
 # Oh-My-Zsh
 ZSH=$HOME/.oh-my-zsh
@@ -15,8 +12,10 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git, vi-mode, zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-# Use z for easy navigation
-. `brew --prefix`/etc/profile.d/z.sh
+# Split up path, exports and aliases
+for file in ~/.{path,exports,aliases}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
-# ZSH Syntax Highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval $(thefuck --alias)

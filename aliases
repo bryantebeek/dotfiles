@@ -1,6 +1,8 @@
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
+alias i='brew cask install $1'
+
 # Open dir in SourceTree
 alias st="open . -a 'SourceTree'"
 
@@ -56,7 +58,10 @@ wu() {
 	fi
 }
 
-alias ls=exa
+# Changing directories
+alias ls="exa -hlg --git $1"
+alias tree="exa -hlgT --git $1"
+alias f="fuck"
 
 alias flip='echo "(╯°□°）╯︵ ┻━┻" | tr -d "\n" | pbcopy && echo "copied (╯°□°）╯︵ ┻━┻"'
 alias unflip='echo "┬─┬ノ(°- °ノ)" | tr -d "\n" | pbcopy && echo "copied ┬─┬ノ(°- °ノ)"''"))"'
@@ -65,4 +70,40 @@ alias ouchflip='echo "ﾐ┻┻(ﾉ>｡<)ﾉ" | tr -d "\n" | pbcopy && echo "cop
 # Quickly run an iterm2 project file
 project() {
     osascript .iterm2
+}
+
+# Colorful manpages
+man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+alias s='source ~/.zshrc'
+
+# Peco
+function cdp() {
+    DIR=$(find ~/Lifely ~/Lifely/Projects ~/ -type d -maxdepth 1 | peco --prompt "Search>" --select-1)
+    cd $DIR
+}
+
+function cdd() {
+    DIR=$(find . -type d | peco --prompt "Search>" --select-1)
+    cd $DIR
+}
+
+function gcb() {
+    BRANCH=$(git branch -a | peco --prompt "Branch>" --select-1 | tr -d '[:space:]')
+    git checkout $BRANCH
+}
+
+function ckill() {
+    PID=$(ps -ax | peco | awk '{ print $1 }')
+    kill $PID
 }
