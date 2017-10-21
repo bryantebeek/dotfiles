@@ -100,11 +100,10 @@ PROJECT_DIRECTORIES=(
     "$HOME/Lifely/Projects"
 )
 
-DIR_ACTIONS="Change working directory (cd):cd <DIR>
-Source Tree:open <DIR> -a 'SourceTree'
-Visual Studio Code:open <DIR> -a 'Visual Studio Code'
-Git open remote:
-$EDITOR:$EDITOR <DIR>"
+DIR_ACTIONS="Change directory:cd <DIR>
+Open with Source Tree:open <DIR> -a 'SourceTree'
+Open with Visual Studio Code:open <DIR> -a 'Visual Studio Code'
+Open with $EDITOR:$EDITOR <DIR>"
 
 FILE_ACTIONS="Open:open <FILE>
 View (inline):cat <FILE>
@@ -114,12 +113,12 @@ $EDITOR:$EDITOR <FILE>"
 
 function searchFiles() {
     SEARCH_DIRECTORY=${${1}:-$HOME}
-    echo $(mdfind 'kMDItemContentType != public.folder' -onlyin "$SEARCH_DIRECTORY" | fzf --exit-0 --header=Directories --preview 'cat {}')
+    echo $(mdfind 'kMDItemContentType != public.folder' -onlyin "$SEARCH_DIRECTORY" | fzf --exit-0 --header=Files --preview 'cat {}')
 }
 
 function searchDirectories() {
     SEARCH_DIRECTORY=${${1}:-$HOME}
-    echo $(mdfind 'kMDItemContentType == public.folder' -onlyin "$SEARCH_DIRECTORY" | fzf --exit-0 --header=Directories --preview 'cat {}')
+    echo $(mdfind 'kMDItemContentType == public.folder' -onlyin "$SEARCH_DIRECTORY" | fzf --exit-0 --header=Directories)
 }
 
 function search
@@ -164,6 +163,6 @@ function scd() {
 }
 
 function sp() {
-    DIR=$(find ${PROJECT_DIRECTORIES[@]} -type d -maxdepth 1 | fzf --exit-0 --header=Directories)
+    DIR=$(find ${PROJECT_DIRECTORIES[@]} -type d -maxdepth 1 | fzf --exit-0 --header=Projects)
     _directoryActions $DIR $DIRECTORY_ACTIONS
 }
