@@ -12,10 +12,17 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git, vi-mode, zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-# Split up path, exports and aliases
-for file in ~/.{path,exports,aliases}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
+# Load exports
+source ~/.exports
 
-eval $(thefuck --alias)
+# Load functions configuration
+source ~/.functions/config.sh
+
+# Load all functions
+source ~/.functions/iterm2.sh
+source ~/.functions/filesystem.sh
+source ~/.functions/ssh.sh
+source ~/.functions/watch.sh
+
+# Load aliases (these can alias a function)
+source ~/.aliases
