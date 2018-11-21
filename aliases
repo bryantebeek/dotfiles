@@ -53,7 +53,6 @@ alias w="watch -n 0.5 "
 # Changing directories
 alias ls="exa -hlg --git $1"
 alias tree="exa -hlgT --git $1"
-alias f="fuck"
 
 alias flip='echo "(╯°□°）╯︵ ┻━┻" | tr -d "\n" | pbcopy && echo "copied (╯°□°）╯︵ ┻━┻"'
 alias unflip='echo "┬─┬ノ(°- °ノ)" | tr -d "\n" | pbcopy && echo "copied ┬─┬ノ(°- °ノ)"''"))"'

@@ -6,7 +6,7 @@ test -e "/usr/local/etc/profile.d/z.sh" && source "/usr/local/etc/profile.d/z.sh
 
 # Oh-My-Zsh
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="bryantebeek"
+ZSH_THEME="spaceship"
 DISABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(git, vi-mode, zsh-syntax-highlighting)
@@ -26,3 +26,7 @@ source ~/.functions/watch.sh
 
 # Load aliases (these can alias a function)
 source ~/.aliases
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship
