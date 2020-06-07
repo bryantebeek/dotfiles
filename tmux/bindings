@@ -1,0 +1,20 @@
+# Bindings
+bind r source-file ~/.tmux.conf \; display-message "Reloading configuration ..."
+bind x kill-pane
+
+# Synchronisation
+bind y setw synchronize-pane
+
+# Window Splitting
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# Window Movement
+bind -r < swap-window -t -1
+bind -r > swap-window -t +1
+
+# Pane Resizing
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5

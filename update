@@ -7,6 +7,14 @@ if [ ! -d ~/.dotfiles ]; then
     git clone git@github.com:bryantebeek/dotfiles.git ~/.dotfiles
 fi
 
+if [ ! -d ~/.zsh/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+fi
+
+if [ ! -d ~/.zsh/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+fi
+
 # Update dotfiles
 git -C ~/.dotfiles pull
 
@@ -16,15 +24,36 @@ xcode-select --install
 # Hide login message
 touch .hushlogin
 
+# Install Vim Vundle
+if [ test -e ~/.vim/bundle/Vundle.vim ]; then
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+    cd "~/.vim/bundle/Vundle.vim" && git pull
+    cd ~
+fi
+
 # Install Homebrew & Co.
 if [ ! command -v brew >/dev/null 2>&1 ]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+if [ test -e $ZSH_CUSTOM/themes/spaceship-prompt ]; then
+    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+else
+    cd "$ZSH_CUSTOM/themes/spaceship-prompt" && git pull
+    cd ~
+fi
+
 # Install rcm for dotfiles management
 # See: <https://github.com/thoughtbot/rcm>
-brew tap thoughtbot/formulae
-brew install rcm
+if [ ! command -v rcup >/dev/null 2>&1 ]; then
+    brew tap thoughtbot/formulae
+    brew install rcm
+fi
+
+# Other brew installations
+if [ ! command -v ncdu >/dev/null 2>&1 ]; then brew install ncdu fi
+if [ ! command -v z >/dev/null 2>&1 ]; then brew install z fi
 
 # Symlink dotfiles
 rcup -v -x config

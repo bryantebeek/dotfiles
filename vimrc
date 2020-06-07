@@ -14,6 +14,10 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-dispatch'
+Plugin 'noahfrederick/vim-composer' 
+Plugin 'noahfrederick/vim-laravel'
 
 call vundle#end()
 

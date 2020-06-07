@@ -1,6 +1,9 @@
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
+# Please
+alias please='sudo'
+
 alias i='brew cask install $1'
 
 # Open dir in SourceTree
@@ -82,3 +85,14 @@ alias da="currentDirectoryAndAction"
 alias ss="sshFromSearchHosts"
 alias ssh="sshAndSwitchProfile"
 alias wu="watchUrl"
+
+# Easy directory switching
+alias L="cd ~/Lifely"
+
+# Laravel
+alias homestead="cd ~/Homestead && vagrant ssh"
+
+# Generate passwords
+alias pw="openssl rand -base64 15 | pbcopy && echo 'Copied your password!'"
+
+alias codew="code *.code-workspace"

@@ -1,3 +1,7 @@
+function iterm2Title {
+    echo -ne "\033]0;"$@"\007"
+}
+
 function iterm2SetBadge() {
     printf "\e]1337;SetBadgeFormat=%s\a" $(echo "$@" | base64)
 }
